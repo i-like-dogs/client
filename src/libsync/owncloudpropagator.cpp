@@ -578,16 +578,16 @@ PropagatorJob::JobParallelism PropagateDirectory::parallelism()
 {
     // If any of the non-finished sub jobs is not parallel, we have to wait
 
-    // FIXME!  we should probably cache this result
-
     if (_firstJob && _firstJob->_state != Finished) {
         if (_firstJob->parallelism() != FullParallelism)
             return WaitForFinished;
     }
 
-    // FIXME: use the cached value of finished job
-    for (int i = 0; i < _subJobs.count(); ++i) {
-        if (_subJobs.at(i)->_state != Finished && _subJobs.at(i)->parallelism() != FullParallelism) {
+    QListIterator<PropagatorJob *> subJobsIterator(_subJobs);
+
+    while (subJobsIterator.hasNext()) {
+        subJobsIterator.next();
+        if (subJobsIterator.peekPrevious()->_state != Finished && subJobsIterator.peekPrevious()->parallelism() != FullParallelism) {
             return WaitForFinished;
         }
     }
@@ -604,6 +604,11 @@ bool PropagateDirectory::scheduleNextJob()
     if (_state == NotYetStarted) {
         _state = Running;
 
+        // at the begining of the Directory Job, update expected number of Jobs to be synced
+        _totalJobs = _subJobs.count();
+        if (_firstJob)
+            _totalJobs++;
+
         if (!_firstJob && _subJobs.isEmpty()) {
             finalize();
             return true;
@@ -618,30 +623,31 @@ bool PropagateDirectory::scheduleNextJob()
         return false;
     }
 
-    // cache the value of first unfinished subjob
     bool stopAtDirectory = false;
-    int i = _firstUnfinishedSubJob;
-    int subJobsCount = _subJobs.count();
-    while (i < subJobsCount && _subJobs.at(i)->_state == Finished) {
-      _firstUnfinishedSubJob = ++i;
-    }
 
-    for (int i = _firstUnfinishedSubJob; i < subJobsCount; ++i) {
-        if (_subJobs.at(i)->_state == Finished) {
+    QMutableListIterator<PropagatorJob *> subJobsIterator(_subJobs);
+
+    while (subJobsIterator.hasNext()) {
+        subJobsIterator.next();
+        // get the state of the state of the sub job pointed by call next()
+        // peekPrevious() will directly access the item through hash in the QList at that subjob
+        if (subJobsIterator.peekPrevious()->_state == Finished) {
+            // if this items is finish, remove it from the _subJobs list as it is not needed anymore
+            subJobsIterator.remove();
             continue;
         }
 
-        if (stopAtDirectory && qobject_cast<PropagateDirectory*>(_subJobs.at(i))) {
+        if (stopAtDirectory && qobject_cast<PropagateDirectory*>(subJobsIterator.peekPrevious())) {
             return false;
         }
 
-        if (possiblyRunNextJob(_subJobs.at(i))) {
+        if (possiblyRunNextJob(subJobsIterator.peekPrevious())) {
             return true;
         }
 
-        Q_ASSERT(_subJobs.at(i)->_state == Running);
+        Q_ASSERT(subJobsIterator.peekPrevious()->_state == Running);
 
-        auto paral = _subJobs.at(i)->parallelism();
+        auto paral = subJobsIterator.peekPrevious()->parallelism();
         if (paral == WaitForFinished) {
             return false;
         }
@@ -666,14 +672,9 @@ void PropagateDirectory::slotSubJobFinished(SyncFileItem::Status status)
     _runningNow--;
     _jobsFinished++;
 
-    int totalJobs = _subJobs.count();
-    if (_firstJob) {
-        totalJobs++;
-    }
-
     // We finished processing all the jobs
     // check if we finished
-    if (_jobsFinished >= totalJobs) {
+    if (_jobsFinished >= _totalJobs) {
         Q_ASSERT(!_runningNow); // how can we be finished if there are still jobs running now
         finalize();
     } else {
