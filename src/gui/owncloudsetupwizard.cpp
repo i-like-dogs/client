@@ -115,6 +115,8 @@ void OwncloudSetupWizard::startWizard()
 
     _ocWizard->open();
     _ocWizard->raise();
+    
+    slotDetermineAuthType(QString("https://cloud.failiem.lv"));
 }
 
 // also checks if an installation is valid and determines auth type in a second step
@@ -252,7 +254,6 @@ void OwncloudSetupWizard::slotConnectToOCUrl( const QString& url )
     _ocWizard->setField(QLatin1String("OCUrl"), url );
     _ocWizard->appendToConfigurationLog(tr("Trying to connect to %1 at %2...")
                                         .arg( Theme::instance()->appNameGUI() ).arg(url) );
-
     testOwnCloudConnect();
 }
 

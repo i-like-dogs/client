@@ -90,6 +90,8 @@ QString Theme::statusHeaderText( SyncResult::Status status ) const
 
 QString Theme::appNameGUI() const
 {
+    printf("appNameGUI() called\n");
+    printf("APPLICATION_NAME: %s\n", APPLICATION_NAME);
     return QLatin1String(APPLICATION_NAME);
 }
 
@@ -413,7 +415,7 @@ QPixmap Theme::wizardHeaderBanner() const
         return QPixmap();
 
     QPixmap pix(QSize(600, 78));
-    pix.fill(wizardHeaderBackgroundColor());
+    pix.fill(QColor("#2f3c52")); //Files.fm color
     return pix;
 }
 #endif
