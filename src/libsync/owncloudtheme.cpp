@@ -24,6 +24,7 @@
 #endif
 #include <QCoreApplication>
 #include <QDebug>
+#include <time.h>
 
 #include "version.h"
 #include "config.h"
@@ -41,21 +42,30 @@ QString ownCloudTheme::configFileName() const
     return QLatin1String("owncloud.cfg");
 }
 
+QString getCurrentYear() {
+    time_t time_raw_format;
+    struct tm* ptr_time;
+
+    time (&time_raw_format);
+    ptr_time = localtime (&time_raw_format);
+    
+    return QString::number(ptr_time->tm_year + 1900);
+}
+
 QString ownCloudTheme::about() const
 {
     QString devString;
     devString = trUtf8("<p>Version %2. For more information visit <a href=\"%3\">https://%4</a></p>"
-               "<p>For known issues and help, please visit: <a href=\"https://central.owncloud.org/c/help/desktop-file-sync\">https://central.owncloud.org</a></p>"
+               "<p>For known issues and help, please send a message to: <a href=\"mailto:support@files.fm?Subject=Files.fm%20desktop%20client\">support@files.fm</a></p>"
                "<p><small>By Klaas Freitag, Daniel Molkentin, Olivier Goffart, Markus Götz, "
-               " Jan-Christoph Borchardt, and others.</small></p>"
-               "<p>Copyright ownCloud GmbH</p>"
-               "<p>Licensed under the GNU General Public License (GPL) Version 2.0<br/>"
-               "ownCloud and the ownCloud Logo are registered trademarks of ownCloud GmbH "
-               "in the United States, other countries, or both.</p>"
+               " Jan-Christoph Borchardt, Artūrs Eimanis, and others.</small></p>"
+               "<p>2008 - %5 © Files.fm, LLC. Made in Europe.</p>"
+               "<p>Licensed under the GNU General Public License (GPL) Version 2.0<br/></p>"
                )
             .arg(MIRALL_VERSION_STRING)
             .arg("https://" MIRALL_STRINGIFY(APPLICATION_DOMAIN))
-            .arg(MIRALL_STRINGIFY(APPLICATION_DOMAIN));
+            .arg(MIRALL_STRINGIFY(APPLICATION_DOMAIN))
+            .arg(getCurrentYear());
 
     devString += gitSHA1();
     return devString;
