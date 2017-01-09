@@ -225,6 +225,7 @@ void OCUpdater::slotVersionInfoArrived()
     }
 
     QString xml = QString::fromUtf8(reply->readAll());
+    printf("Update reply: \n%s\n", xml.toLatin1().data());
 
     bool ok;
     _updateInfo = UpdateInfo::parseString( xml, &ok );
