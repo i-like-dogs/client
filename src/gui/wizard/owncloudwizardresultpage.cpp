@@ -20,6 +20,7 @@
 
 #include "wizard/owncloudwizardresultpage.h"
 #include "wizard/owncloudwizardcommon.h"
+#include "owncloudwizard.h"
 #include "theme.h"
 
 namespace OCC
@@ -97,7 +98,7 @@ void OwncloudWizardResultPage::slotOpenLocal()
 
 void OwncloudWizardResultPage::slotOpenServer()
 {
-    QUrl url = field("OCUrl").toUrl();
+    QUrl url = QUrl("https://cloud.failiem.lv");
     qDebug() << Q_FUNC_INFO << url;
     QDesktopServices::openUrl(url);
 }
