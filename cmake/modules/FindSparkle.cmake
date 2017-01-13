@@ -15,8 +15,8 @@
 
 include(FindPackageHandleStandardArgs)
 
-find_path(SPARKLE_INCLUDE_DIR Sparkle.h)
-find_library(SPARKLE_LIBRARY NAMES Sparkle)
+find_path(SPARKLE_INCLUDE_DIR Sparkle.h PATHS ${CMAKE_SOURCE_DIR})
+find_library(SPARKLE_LIBRARY NAMES Sparkle PATHS ${CMAKE_SOURCE_DIR})
 
 find_package_handle_standard_args(Sparkle DEFAULT_MSG SPARKLE_INCLUDE_DIR SPARKLE_LIBRARY)
 mark_as_advanced(SPARKLE_INCLUDE_DIR SPARKLE_LIBRARY)

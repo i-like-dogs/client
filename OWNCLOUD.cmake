@@ -1,7 +1,7 @@
 set( APPLICATION_NAME       "files.fm" )
 set( APPLICATION_EXECUTABLE "files.fm" )
 set( APPLICATION_DOMAIN     "files.fm" )
-set( APPLICATION_VENDOR     "ownCloud" )
+set( APPLICATION_VENDOR     "files.fm" )
 set( APPLICATION_UPDATE_URL "https://dev4.failiem.lv/client/get_info.php" CACHE string "URL for updater" )
 
 set( THEME_CLASS            "ownCloudTheme" )
