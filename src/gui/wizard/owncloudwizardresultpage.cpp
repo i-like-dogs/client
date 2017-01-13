@@ -20,7 +20,6 @@
 
 #include "wizard/owncloudwizardresultpage.h"
 #include "wizard/owncloudwizardcommon.h"
-#include "owncloudwizard.h"
 #include "theme.h"
 
 namespace OCC
