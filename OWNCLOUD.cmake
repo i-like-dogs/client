@@ -2,7 +2,20 @@ set( APPLICATION_NAME       "files.fm" )
 set( APPLICATION_EXECUTABLE "files.fm" )
 set( APPLICATION_DOMAIN     "files.fm" )
 set( APPLICATION_VENDOR     "files.fm" )
-set( APPLICATION_UPDATE_URL "https://dev4.failiem.lv/client/get_info.php" CACHE string "URL for updater" )
+
+
+if (CMAKE_BUILD_TYPE)
+    string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_LOWER)
+    
+    if (CMAKE_BUILD_TYPE_LOWER MATCHES "release")
+        set( APPLICATION_UPDATE_URL "https://failiem.lv/client/get_info.php" CACHE string "URL for updater" )
+    else()
+        set( APPLICATION_UPDATE_URL "https://dev4.failiem.lv/client/get_info.php" CACHE string "URL for updater" )
+    endif()
+    
+else()
+    set( APPLICATION_UPDATE_URL "https://dev4.failiem.lv/client/get_info.php" CACHE string "URL for updater" )
+endif()
 
 set( THEME_CLASS            "ownCloudTheme" )
 set( APPLICATION_REV_DOMAIN "com.owncloud.desktopclient" )
