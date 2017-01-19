@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -lt 1 ]; then
+if [ $# -lt 2 ]; then
   echo "Usage: $(basename $0) directory_relative_to_home build_type [uid]"
   exit
 fi
