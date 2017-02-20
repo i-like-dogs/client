@@ -57,18 +57,19 @@ Account::~Account()
 
 QString Account::davPath() const
 {
-    if (capabilities().chunkingNg()) {
-        // The chunking-ng means the server prefer to use the new webdav URL
-        return QLatin1String("/remote.php/dav/files/") + davUser() + QLatin1Char('/');
-    }
-
-    // make sure to have a trailing slash
-    if( !_davPath.endsWith('/') ) {
-        QString dp(_davPath);
-        dp.append('/');
-        return dp;
-    }
-    return _davPath;
+    // if (capabilities().chunkingNg()) {
+    //     // The chunking-ng means the server prefer to use the new webdav URL
+    //     return QLatin1String("/remote.php/dav/files/") + davUser() + QLatin1Char('/');
+    // }
+    // 
+    // // make sure to have a trailing slash
+    // if( !_davPath.endsWith('/') ) {
+    //     QString dp(_davPath);
+    //     dp.append('/');
+    //     return dp;
+    // }
+    // return _davPath;
+    return QString("/");
 }
 
 void Account::setSharedThis(AccountPtr sharedThis)
@@ -147,6 +148,7 @@ void Account::setCredentials(AbstractCredentials *cred)
 QUrl Account::davUrl() const
 {
     return Utility::concatUrlPath(url(), davPath());
+    // return url();
 }
 
 void Account::clearCookieJar()

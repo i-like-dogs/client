@@ -116,7 +116,7 @@ void OwncloudSetupWizard::startWizard()
     _ocWizard->open();
     _ocWizard->raise();
     
-    slotDetermineAuthType(QString("https://cloud.failiem.lv"));
+    // slotDetermineAuthType(QString("https://cloud.failiem.lv"));
 }
 
 // also checks if an installation is valid and determines auth type in a second step
@@ -188,13 +188,13 @@ void OwncloudSetupWizard::slotOwnCloudFoundAuth(const QUrl& url, const QVariantM
     _ocWizard->account()->setServerVersion(serverVersion);
 
     QString p = url.path();
-    if (p.endsWith("/status.php")) {
-        // We might be redirected, update the account
-        QUrl redirectedUrl = url;
-        redirectedUrl.setPath(url.path().left(url.path().length() - 11));
-        _ocWizard->account()->setUrl(redirectedUrl);
-        qDebug() << Q_FUNC_INFO << " was redirected to" << redirectedUrl.toString();
-    }
+    // if (p.endsWith("/status.php")) {
+    //     // We might be redirected, update the account
+    //     QUrl redirectedUrl = url;
+    //     redirectedUrl.setPath(url.path().left(url.path().length() - 11));
+    //     _ocWizard->account()->setUrl(redirectedUrl);
+    //     qDebug() << Q_FUNC_INFO << " was redirected to" << redirectedUrl.toString();
+    // }
 
     DetermineAuthTypeJob *job = new DetermineAuthTypeJob(_ocWizard->account(), this);
     job->setIgnoreCredentialFailure(true);

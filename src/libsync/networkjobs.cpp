@@ -367,7 +367,7 @@ bool LsColJob::finished()
 /*********************************************************************************************/
 
 namespace {
-const char statusphpC[] = "status.php";
+const char statusphpC[] = "_spec_filesfm_cloudsync/status.php";
 const char owncloudDirC[] = "owncloud/";
 }
 
