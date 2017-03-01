@@ -1,5 +1,5 @@
-set( APPLICATION_NAME       "files.fm" )
-set( APPLICATION_EXECUTABLE "files.fm" )
+set( APPLICATION_NAME       "Files.fm sync" )
+set( APPLICATION_EXECUTABLE "Files.fm_sync" )
 set( APPLICATION_DOMAIN     "files.fm" )
 set( APPLICATION_VENDOR     "files.fm" )
 
