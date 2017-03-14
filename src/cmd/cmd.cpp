@@ -403,7 +403,7 @@ int main(int argc, char **argv) {
     //obtain capabilities using event loop
     QEventLoop loop;
 
-    JsonApiJob *job = new JsonApiJob(account, QLatin1String("ocs/v1.php/cloud/capabilities"));
+    JsonApiJob *job = new JsonApiJob(account, QLatin1String("_spec_filesfm_cloudsync/capabilities.php"));
     job->setTimeout(timeoutToUseMsec);
     QObject::connect(job, &JsonApiJob::jsonReceived, [&](const QVariantMap &json) {
         auto caps = json.value("ocs").toMap().value("data").toMap().value("capabilities");
