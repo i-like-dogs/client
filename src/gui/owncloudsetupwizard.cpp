@@ -116,7 +116,7 @@ void OwncloudSetupWizard::startWizard()
     _ocWizard->open();
     _ocWizard->raise();
     
-    // slotDetermineAuthType(QString("https://cloud.failiem.lv"));
+    slotDetermineAuthType(QString("https://cloud.failiem.lv"));
 }
 
 // also checks if an installation is valid and determines auth type in a second step
