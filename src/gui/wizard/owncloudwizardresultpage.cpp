@@ -97,7 +97,7 @@ void OwncloudWizardResultPage::slotOpenLocal()
 
 void OwncloudWizardResultPage::slotOpenServer()
 {
-    QUrl url = QUrl("https://cloud.failiem.lv");
+    QUrl url = QUrl("https://files.fm");
     qDebug() << Q_FUNC_INFO << url;
     QDesktopServices::openUrl(url);
 }
