@@ -125,12 +125,12 @@ QPixmap ownCloudTheme::wizardHeaderLogo() const
 
 QString ownCloudTheme::appName() const
 {
-    return QLatin1String("files.fm");
+    return QLatin1String("Files.fm sync");
 }
 
 QString ownCloudTheme::appNameGUI() const
 {
-    return QLatin1String("files.fm");
+    return QLatin1String("Files.fm sync");
 }
 
 
