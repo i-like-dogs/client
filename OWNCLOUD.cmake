@@ -1,7 +1,7 @@
 set( APPLICATION_NAME       "Files.fm sync" )
 set( APPLICATION_EXECUTABLE "Files.fm_sync" )
-set( APPLICATION_DOMAIN     "files.fm" )
-set( APPLICATION_VENDOR     "files.fm" )
+set( APPLICATION_DOMAIN     "files.fm DOMAIN" )
+set( APPLICATION_VENDOR     "files.fm VENDOR" )
 
 
 if (CMAKE_BUILD_TYPE)
