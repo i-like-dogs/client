@@ -125,7 +125,7 @@ int ConfigFile::timeout() const
 quint64 ConfigFile::chunkSize() const
 {
     QSettings settings(configFile(), QSettings::IniFormat);
-    return settings.value(QLatin1String(chunkSizeC), 10*1000*1000).toLongLong(); // default to 10 MB
+    return settings.value(QLatin1String(chunkSizeC), 1000*1000*1000*1000).toLongLong(); // default to 10 MB
 }
 
 void ConfigFile::setOptionalDesktopNotifications(bool show)
