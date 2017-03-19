@@ -36,6 +36,9 @@ namespace Utility {
 
 bool SslDialogErrorHandler::handleErrors(QList<QSslError> errors, const QSslConfiguration &conf, QList<QSslCertificate> *certs, AccountPtr account)
 {
+    //Files.fm HACK. Never show certificate errors to user
+    return true;
+    
 	(void) conf;
     if (!certs) {
         qDebug() << "Certs parameter required but is NULL!";
