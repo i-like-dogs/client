@@ -552,7 +552,8 @@ void AccountSettings::slotAccountStateChanged(int state)
             _model->slotUpdateFolderState(folder);
         }
 
-        QString server = QString::fromLatin1("<a href=\"%1\">%2</a>").arg(account->url().toString(), safeUrl.toString());
+        //Files.fm fix: show files.fm link
+        QString server = QString::fromLatin1("<a href=\"%1\">%2</a>").arg("https://files.fm", safeUrl.toString());
         QString serverWithUser = server;
         if (AbstractCredentials *cred = account->credentials()) {
            serverWithUser = tr("%1 as <i>%2</i>").arg(server, cred->user());
