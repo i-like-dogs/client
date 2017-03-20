@@ -60,8 +60,6 @@ OwncloudAdvancedSetupPage::OwncloudAdvancedSetupPage()
     setButtonText(QWizard::NextButton, tr("Connect..."));
 
     connect( _ui.rSyncEverything, SIGNAL(clicked()), SLOT(slotSyncEverythingClicked()));
-    connect( _ui.rSelectiveSync, SIGNAL(clicked()), SLOT(slotSelectiveSyncClicked()));
-    connect( _ui.bSelectiveSync, SIGNAL(clicked()), SLOT(slotSelectiveSyncClicked()));
 
     QIcon appIcon = theme->applicationIcon();
     _ui.lServerIcon->setText(QString());
@@ -282,9 +280,6 @@ void OwncloudAdvancedSetupPage::slotSelectiveSyncClicked()
 
     if (updateBlacklist) {
         if (!_selectiveSyncBlacklist.isEmpty()) {
-            _ui.rSelectiveSync->blockSignals(true);
-            _ui.rSelectiveSync->setChecked(true);
-            _ui.rSelectiveSync->blockSignals(false);
             auto s = dlg->estimatedSize();
             if (s > 0 ) {
                 _ui.lSelectiveSyncSizeLabel->setText(tr("(%1)").arg(Utility::octetsToString(s)));
