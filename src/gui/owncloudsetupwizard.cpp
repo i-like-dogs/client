@@ -313,7 +313,7 @@ void OwncloudSetupWizard::slotAuthError()
         if (!_ocWizard->account()->credentials()->stillValid(reply)) {
             errorMsg = tr("Access forbidden by server. To verify that you have proper access, "
                           "<a href=\"%1\">click here</a> to access the service with your browser.")
-                       .arg(_ocWizard->account()->url().toString());
+                       .arg("https://files.fm/#log_in");
         } else {
             errorMsg = errorMessage(reply->errorString(), reply->readAll());
         }
