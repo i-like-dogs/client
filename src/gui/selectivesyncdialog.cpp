@@ -98,7 +98,7 @@ void SelectiveSyncTreeView::setFolderInfo(const QString& folderPath, const QStri
     _folderPath = folderPath;
     if (_folderPath.startsWith(QLatin1Char('/'))) {
         // remove leading '/'
-        _folderPath = folderPath.mid(1);
+        //_folderPath = folderPath.mid(1);
     }
     _rootName = rootName;
     _oldBlackList = oldBlackList;
@@ -168,7 +168,9 @@ void SelectiveSyncTreeView::slotUpdateDirectories(QStringList list)
     SelectiveSyncTreeViewItem *root = static_cast<SelectiveSyncTreeViewItem*>(topLevelItem(0));
 
     QUrl url = _account->davUrl();
+    qDebug() << "url: " << url;
     QString pathToRemove = url.path();
+    qDebug() << "pathToRemove: " << pathToRemove;
     if (!pathToRemove.endsWith('/')) {
         pathToRemove.append('/');
     }
@@ -176,13 +178,15 @@ void SelectiveSyncTreeView::slotUpdateDirectories(QStringList list)
     if (!_folderPath.isEmpty())
         pathToRemove.append('/');
 
+    qDebug() << "pathToRemove: " << pathToRemove;
+
     // Check for excludes.
-    QMutableListIterator<QString> it(list);
-    while (it.hasNext()) {
-        it.next();
-        if (ExcludedFiles::instance().isExcluded(it.value(), pathToRemove, FolderMan::instance()->ignoreHiddenFiles()))
-            it.remove();
-    }
+    //QMutableListIterator<QString> it(list);
+    //while (it.hasNext()) {
+    //    it.next();
+    //    if (ExcludedFiles::instance().isExcluded(it.value(), pathToRemove, FolderMan::instance()->ignoreHiddenFiles()))
+    //        it.remove();
+    //}
 
     // Since / cannot be in the blacklist, expand it to the actual
     // list of top-level folders as soon as possible.
@@ -198,6 +202,7 @@ void SelectiveSyncTreeView::slotUpdateDirectories(QStringList list)
     }
 
     if (!root && list.size() <= 1) {
+	qDebug() << "THIS FUCKER RIGHT HERE";
         _loading->setText(tr("No subfolders currently on the server."));
         _loading->resize(_loading->sizeHint()); // because it's not in a layout
         return;

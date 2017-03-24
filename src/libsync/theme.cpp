@@ -427,7 +427,7 @@ bool Theme::wizardSelectiveSyncDefaultNothing() const
 
 QString Theme::webDavPath() const
 {
-    return QLatin1String("remote.php/webdav/");
+    return QLatin1String("");
 }
 
 QString Theme::webDavPathNonShib() const

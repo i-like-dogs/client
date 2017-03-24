@@ -68,8 +68,7 @@ QString Account::davPath() const
     //     dp.append('/');
     //     return dp;
     // }
-    // return _davPath;
-    return QString("/");
+     return _davPath;
 }
 
 void Account::setSharedThis(AccountPtr sharedThis)
