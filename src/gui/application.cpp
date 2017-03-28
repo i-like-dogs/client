@@ -105,6 +105,9 @@ Application::Application(int &argc, char **argv) :
 {
     _startedAt.start();
 
+
+    _logDir = QDir::homePath() + QString("/") + Theme::instance()->appName() + QString("/.logs");
+
 #ifdef Q_OS_WIN
     // Ensure OpenSSL config file is only loaded from app directory
     QString opensslConf = QCoreApplication::applicationDirPath()+QString("/openssl.cnf");
