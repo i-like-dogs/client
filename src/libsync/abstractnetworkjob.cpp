@@ -52,6 +52,9 @@ AbstractNetworkJob::AbstractNetworkJob(AccountPtr account, const QString &path, 
 {
     _timer.setSingleShot(true);
     _timer.setInterval(OwncloudPropagator::httpTimeout() * 1000); // default to 30 minutes.
+    
+    qDebug() << "************Setting timeout to " << OwncloudPropagator::httpTimeout() * 1000;
+    
     connect(&_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
 
     connect(this, SIGNAL(networkActivity()), SLOT(resetTimeout()));
@@ -236,6 +239,7 @@ void AbstractNetworkJob::start()
 
 void AbstractNetworkJob::slotTimeout()
 {
+    qDebug() << "Request timed out";
     _timedout = true;
     if (reply()) {
         qDebug() << Q_FUNC_INFO << this << "Timeout" << reply()->request().url();
