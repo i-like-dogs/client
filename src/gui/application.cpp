@@ -400,6 +400,9 @@ void Application::slotParseMessage(const QString &msg, QObject*)
 
 void Application::parseOptions(const QStringList &options)
 {
+    //Default loggind dir
+    _logDir = QDir::homePath() + QString("/") + Theme::instance()->appName() + QString("/.logs");
+
     QStringListIterator it(options);
     // skip file name;
     if (it.hasNext()) it.next();
