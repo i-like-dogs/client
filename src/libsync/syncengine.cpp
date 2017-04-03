@@ -638,7 +638,10 @@ int SyncEngine::treewalkFile( TREE_WALK_FILE *file, bool remote )
     item->log._other_modtime     = file->other.modtime;
     item->log._other_size        = file->other.size;
 
-    _syncItemMap.insert(key, item);
+
+    //HACK: Don't show  info about .logs folder in the ui
+    if (key != ".logs")
+    	_syncItemMap.insert(key, item);
 
     emit syncItemDiscovered(*item);
     return re;
