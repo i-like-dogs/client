@@ -208,12 +208,12 @@ Application::Application(int &argc, char **argv) :
     // Cleanup at Quit.
     connect (this, SIGNAL(aboutToQuit()), SLOT(slotCleanup()));
     
-        
-    QSettings settings;
+    ConfigFile config;
+    QSettings settings(config.configFile());
     if (settings.contains("LAUNCHED_PREVIOUSLY")) {
-        printf("NOT first\n");
+        qDebug() << "Not first launch";
     } else {
-        printf("First launch\n");
+        qDebug() << "First launch";
         settings.setValue("LAUNCHED_PREVIOUSLY", true);
         Theme *theme = Theme::instance();
         Utility::setLaunchOnStartup(theme->appName(), theme->appNameGUI(), true);
