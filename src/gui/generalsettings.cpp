@@ -110,6 +110,7 @@ void GeneralSettings::loadMiscSettings()
 
 void GeneralSettings::slotUpdateInfo()
 {
+    _ui->autostartCheckBox->setChecked(Utility::hasLaunchOnStartup(Theme::instance()->appName()));
     OCUpdater *updater = dynamic_cast<OCUpdater*>(Updater::instance());
     if (ConfigFile().skipUpdateCheck()) {
         updater = 0; // don't show update info if updates are disabled
