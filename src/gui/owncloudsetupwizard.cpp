@@ -116,7 +116,7 @@ void OwncloudSetupWizard::startWizard()
     _ocWizard->open();
     _ocWizard->raise();
 
-    slotDetermineAuthType(QString("https://webdav.file.fm"));
+    slotDetermineAuthType(QString("https://webdav.files.fm"));
 }
 
 // also checks if an installation is valid and determines auth type in a second step
