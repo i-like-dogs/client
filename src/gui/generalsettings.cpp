@@ -94,6 +94,7 @@ GeneralSettings::~GeneralSettings()
 }
 
 QSize GeneralSettings::sizeHint() const {
+    _ui->autostartCheckBox->setChecked(Utility::hasLaunchOnStartup(Theme::instance()->appName()));
     return QSize(ownCloudGui::settingsDialogSize().width(), QWidget::sizeHint().height());
 }
 
