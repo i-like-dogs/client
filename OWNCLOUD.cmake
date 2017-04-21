@@ -27,5 +27,5 @@ set( MAC_INSTALLER_BACKGROUND_FILE "${CMAKE_SOURCE_DIR}/admin/osx/installer-back
 # set( APPLICATION_LICENSE    "${OEM_THEME_DIR}/license.txt )
 
 option( WITH_CRASHREPORTER "Build crashreporter" OFF )
-set( CRASHREPORTER_SUBMIT_URL "http://dev4.failiem.lv/files_fm_sync_crashes.php" CACHE string "URL for crash reporter" )
+set( CRASHREPORTER_SUBMIT_URL "http://api.files.fm/api/files_fm_sync_crash_report.php" CACHE string "URL for crash reporter" )
 set( CRASHREPORTER_ICON ":/owncloud-icon.png" )
